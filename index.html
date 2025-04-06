@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <style>
+        /* 自定义悬浮入口的位置 */
+        #position_demo {
+            position: absolute;
+            right: 10px;
+            bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Hello World</h1>
+    <div id="position_demo"></div>
+        //更新SDK版本
+    <script src="https://lf-cdn.coze.cn/obj/unpkg/flow-platform/chat-app-sdk/1.2.0-beta.6/libs/cn/index.js"></script>
+    <script>
+        new CozeWebSDK.WebChatClient({
+            config: {
+                bot_id: '7485764804163682319',
+                isIframe: false,
+            },
+            // 自定义智能体名称和icon
+            componentProps: {
+                title: '电路分析基础实验AI助手',
+                //icon智能体的显示图标
+                icon = 'https://lf-bot-studio-plugin-resource.coze.cn/obj/bot-studio-platform-plugin-tos/artist/image/7e813aa2c7e14ebb9e2d1a989acfb128.png',
+                lang = 'zh-CN',
+                layout = 'pc',
+                width = 800,
+                uploadable: true
+            },
+            auth: {
+                //鉴权方式，默认type 为unauth，表示不鉴权；建议设置为 token，表示通过PAT或OAuth鉴权
+                auth: {
+                    type: 'token',
+                    token: 'pat_********',
+                    onRefreshToken: function () {
+                        return 'pat_********'
+                    }
+                }
+            },
+             // 用户信息
+             userInfo: {
+                id: '12345',
+                url: 'https://lf-coze-web-cdn.coze.cn/obj/coze-web-cn/obric/coze/favicon.1970.png',
+                nickname: '学号',
+            },
+            // 添加聊天窗口的整体 UI 效果
+            ui: {
+                base: {
+                    icon: 'https://lf-coze-web-cdn.coze.cn/obj/coze-web-cn/obric/coze/favicon.1970.png',//应用图标的URL
+                    layout: 'pc',
+                    zIndex: 1000,
+                }
+            },
+            //展示悬浮球
+            asstBtn: {
+                isNeed: ture,
+            },
+        //聊天框底部文案
+            footer: {
+            isShow: true,
+            expressionText: 'Powered by {{name}}&{{name1}}',
+            linkvars: {
+                name: {
+                    text: 'A',
+                    link: 'https://www.test1.com'
+                },
+                name1: {
+                    text: 'B',
+                    link: 'https://www.test2.com'
+                }
+            }
+        },
+        //顶部标题栏配置
+            header: {
+                isShow: true,
+                isNeedClose: true,
+            },
+        //聊天框
+            chatBot: {
+                title: " 电路分析基础实验AI助手",
+                uploadable: true,
+                width: 460,
+                el: undefined,
+                onHide: () => {
+                    // todo...
+                },
+                onShow: () => {
+                    // todo...
+                },
+            },
+            el: document.getElementById('position_demo'),
+                });
+    </script>
+</body>
+</html>
