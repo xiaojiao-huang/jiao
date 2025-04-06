@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
     <style>
         /* 自定义悬浮入口的位置 */
@@ -11,55 +11,59 @@
     </style>
 </head>
 <body>
-    <h1>Hello World</h1>
+    <h1>电路分析基础实验AI助手</h1>
     <div id="position_demo"></div>
     <script src="https://lf-cdn.coze.cn/obj/unpkg/flow-platform/chat-app-sdk/1.2.0-beta.6/libs/cn/index.js"></script>
     <script>
-        new CozeWebSDK.WebChatClient({
-            config: {
-                bot_id: '7485764804163682319',
-                isIframe: false,
-            },
-            // 自定义智能体名称和icon
-            componentProps: {
-                title: '电路分析基础实验AI助手',
-                //icon智能体的显示图标
-                icon = 'https://lf-bot-studio-plugin-resource.coze.cn/obj/bot-studio-platform-plugin-tos/artist/image/7e813aa2c7e14ebb9e2d1a989acfb128.png',
-                lang = 'zh-CN',
-                layout = 'pc',
-                width = 800,
-                uploadable: true
-            },
-            auth: {
-                //鉴权方式，默认type 为unauth，表示不鉴权；建议设置为 token，表示通过PAT或OAuth鉴权
-                auth: {
-                    type: 'token',
-                    token: 'pat_********',
-                    onRefreshToken: function () {
-                        return 'pat_********'
-                    }
-                }
-            },
-             // 用户信息
-             userInfo: {
-                id: '12345',
-                url: 'https://lf-coze-web-cdn.coze.cn/obj/coze-web-cn/obric/coze/favicon.1970.png',
-                nickname: '学号',
-            },
-            // 添加聊天窗口的整体 UI 效果
-            ui: {
-                base: {
-                    icon: 'https://lf-coze-web-cdn.coze.cn/obj/coze-web-cn/obric/coze/favicon.1970.png',//应用图标的URL
-                    layout: 'pc',
-                    zIndex: 1000,
-                }
-            },
-            //展示悬浮球
-            asstBtn: {
-                isNeed: ture,
-            },
-        //聊天框底部文案
-            footer: {
+        // 提取配置项，使代码更易读
+        const config = {
+            bot_id: '7485764804163682319',
+            isIframe: false
+        };
+
+        const componentProps = {
+            title: '电路分析基础实验AI助手',
+            // icon 智能体的显示图标，需替换为有效的图片链接
+            icon: 'https://cn.bing.com/images/search?view=detailV2&ccid=eJA2nuO3&id=98B860016843A50FF9623FEC89E43200FCE57058&thid=OIP.eJA2nuO3qvW2N5xptrwt1AHaFX&mediaurl=https%3a%2f%2fpmo11af89-hkpic1.websiteonline.cn%2fupload%2fDL-II.jpg&exph=2659&expw=3666&q=%e7%94%b5%e8%b7%af%e5%88%86%e6%9e%90%e5%ae%9e%e9%aa%8c%e5%9b%be%e7%89%87&simid=608011583154893067&FORM=IRPRST&ck=0D75F9D413BA6BAF262F5611ED7171D5&selectedIndex=0&itb=0&idpp=overlayview&ajaxhist=0&ajaxserp=0',
+            lang: 'zh-CN',
+            layout: 'pc',
+            width: 800,
+            uploadable: true
+        };
+
+        const auth = {
+            type: 'token',
+            // 实际应用中需要替换为真实的 token
+            token: 'pat_DSG5F7zbzeqpjvmES2kpRbatIgFbd2Tj2QaoaRak9Wz98M4FLF5WMmJcw2dZRZX7',
+            onRefreshToken: function () {
+                // 实际应用中需要实现动态获取 token 的逻辑
+                return 'pat_DSG5F7zbzeqpjvmES2kpRbatIgFbd2Tj2QaoaRak9Wz98M4FLF5WMmJcw2dZRZX7';
+            }
+        };
+
+        const userInfo = {
+            id: '12345',
+            url: 'https://lf-coze-web-cdn.coze.cn/obj/coze-web-cn/obric/coze/favicon.1970.png',
+            nickname: '学号'
+        };
+
+        const ui = {
+            base: {
+                // 需替换为有效的图片链接
+                icon: 'https://example.com/valid-image-url.png',
+                layout: 'pc',
+                zIndex: 1000
+            }
+        };
+
+        const asstBtn = {
+            isNeed: true,
+            style: {
+                size: 'medium'
+            }
+        };
+
+        const footer = {
             isShow: true,
             expressionText: 'Powered by {{name}}&{{name1}}',
             linkvars: {
@@ -72,27 +76,37 @@
                     link: 'https://www.test2.com'
                 }
             }
+        };
+
+        const header = {
+            isShow: true,
+            isNeedClose: true,
+            title: '电路分析基础实验AI助手'
+        };
+
+        const chatBot = {
+            title: " 电路分析基础实验AI助手",
+            uploadable: true,
+            width: 460,
+            el: undefined,
+            onHide: () => console.log('窗口隐藏'),
+            onShow: () => console.log('窗口显示')
+        };
+
+        new CozeWebSDK.WebChatClient({
+            config,
+            componentProps,
+            auth,
+            userInfo,
+            ui,
+            asstBtn,
+            footer,
+            header,
+            chatBot
         },
-        //顶部标题栏配置
-            header: {
-                isShow: true,
-                isNeedClose: true,
-            },
-        //聊天框
-            chatBot: {
-                title: " 电路分析基础实验AI助手",
-                uploadable: true,
-                width: 460,
-                el: undefined,
-                onHide: () => {
-                    // todo...
-                },
-                onShow: () => {
-                    // todo...
-                },
-            },
-            el: document.getElementById('position_demo'),
-                });
+        // 挂载点配置（移至顶层）
+        el = document.getElementById('position_demo')
+        );
     </script>
 </body>
-</html>
+</html>    
